@@ -4,7 +4,7 @@ import { Check, ArrowRight } from 'lucide-react';
 const tiers = [
   {
     name: 'Starter',
-    price: '₹15k+',
+    price: '$150-$200',
     description: 'Perfect for small businesses establishing their first digital presence.',
     features: [
       'Business Website',
@@ -17,7 +17,7 @@ const tiers = [
   },
   {
     name: 'Growth',
-    price: '₹35k+',
+    price: '$200-$300',
     description: 'Advanced solutions for companies ready to automate and scale.',
     features: [
       'Everything in Starter',
@@ -30,7 +30,7 @@ const tiers = [
   },
   {
     name: 'Enterprise',
-    price: '₹75k+',
+    price: '$300-$500',
     description: 'Mission-critical systems and complete AI transformations.',
     features: [
       'Everything in Growth',

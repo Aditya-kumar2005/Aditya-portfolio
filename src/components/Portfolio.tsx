@@ -24,7 +24,7 @@ const projects = [
     tags: ['Node.js', 'API Integration', 'React']
   },
   {
-    title: 'WealthPulse App',
+    title: 'Loanflow App',
     category: 'Mobile Dev',
     image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800',
     description: 'Personal finance tracking application with intuitive data visualizations.',
@@ -43,9 +43,16 @@ export default function Portfolio() {
               Selected <span className="italic text-brand/80">Artifacts.</span>
             </h3>
           </div>
-          <button className="text-brand hover:text-white transition-colors flex items-center gap-2 font-mono text-sm uppercase tracking-widest">
-            View All GitHub Repos <ExternalLink size={16} />
-          </button>
+          <a 
+            href="https://github.com/Aditya-kumar2005?tab=repositories" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <button className="text-brand hover:text-white transition-colors flex             items-center gap-2 font-mono text-sm uppercase tracking-widest">
+                View All GitHub Repos <ExternalLink size={16} />
+              </button>
+            </a>
+
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">

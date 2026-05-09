@@ -19,8 +19,8 @@ export default function Contact() {
             <div className="space-y-8">
               {[
                 { icon: Mail, label: 'Email', value: 'hello@adityalabs.com' },
-                { icon: Phone, label: 'Phone', value: '+91 98765 43210' },
-                { icon: MapPin, label: 'Studio', value: 'New Delhi, India / Remote Global' },
+                { icon: Phone, label: 'Phone', value: '+91 9369248808' },
+                { icon: MapPin, label: 'Studio', value: 'Kanpur nagar, India / Remote Global' },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-brand bg-white/5">
@@ -34,13 +34,31 @@ export default function Contact() {
               ))}
             </div>
 
-            <div className="mt-12 pt-12 border-t border-white/5 flex gap-6">
-              {[Linkedin, Instagram, Github].map((Icon, i) => (
+            {/* <div className="mt-12 pt-12 border-t border-white/5 flex gap-6">
+              {[{Linkedin,#a}, {Instagram,#b}, {Github,#c}].map((Icon, i) => (
                 <a key={i} href="#" className="text-white/40 hover:text-brand transition-colors">
                   <Icon size={24} />
                 </a>
               ))}
-            </div>
+            </div> */}
+            <div className="mt-12 pt-12 border-t border-white/5 flex gap-6">
+                {[
+                  { icon: Linkedin, href: "http://www.linkedin.com/in/aditya-kumar-b4874235b" },
+                  { icon: Instagram, href: "https://instagram.com/yourprofile" },
+                  { icon: Github, href: "https://github.com/Aditya-kumar2005" },
+                ].map(({ icon: Icon, href }, i) => (
+                  <a
+                    key={i}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/40 hover:text-brand transition-colors"
+                  >
+                    <Icon size={24} />
+                  </a>
+                ))}
+              </div>
+
           </div>
 
           <div className="glass p-10 rounded-[2.5rem] border border-white/10 relative overflow-hidden">

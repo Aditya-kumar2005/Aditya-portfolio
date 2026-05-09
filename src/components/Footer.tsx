@@ -50,7 +50,7 @@ export default function Footer() {
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-mono tracking-widest text-white/30">
           <div>© {currentYear} ADITYA LABS. ALL RIGHTS RESERVED.</div>
           <div className="flex gap-8">
-            <a href="#" className="hover:text-brand transition-colors">LINKEDIN</a>
+            <a href="http://www.linkedin.com/in/aditya-kumar-b4874235b" className="hover:text-brand transition-colors">LINKEDIN</a>
             <a href="#" className="hover:text-brand transition-colors">TWITTER</a>
             <a href="#" className="hover:text-brand transition-colors">INSTAGRAM</a>
           </div>
