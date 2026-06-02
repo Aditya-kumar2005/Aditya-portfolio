@@ -1,60 +1,128 @@
-import { Cpu } from 'lucide-react';
+'use client';
+
+import React from 'react';
+import { motion } from 'framer-motion';
+import {
+  Twitter,
+  Github,
+  Linkedin,
+  Instagram,
+} from 'lucide-react';
+import BrandLogo from '@/components/BrandLogo';
+
+const socialLinks = [
+  // { icon: Twitter, href: '#', label: 'Twitter' },
+  { icon: Github, href: 'https://github.com/Aditya-kumar2005', label: 'GitHub' },
+  { icon: Linkedin, href: 'http://www.linkedin.com/in/aditya-kumar-b4874235b', label: 'LinkedIn' },
+  // { icon: Instagram, href: '#', label: 'Instagram' },
+];
+
+const agencyLinks = [
+  { label: 'Services', href: '#services' },
+  { label: 'Portfolio', href: '#portfolio' },
+  { label: 'Process', href: '#process' },
+  { label: 'Expertise', href: '#expertise' },
+];
+
+const resourceLinks = [
+  { label: 'Pricing', href: '#pricing' },
+  { label: 'FAQ', href: '#faq' },
+  { label: 'Privacy', href: '#privacy' },
+];
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
+  const handleNavClick = (href: string) => {
+    const el = document.querySelector(href);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
-    <footer className="py-20 border-t border-white/5 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          <div className="col-span-1 lg:col-span-2">
-            <div className="flex items-center gap-2 mb-6">
-              <Cpu className="text-brand w-8 h-8" />
-              <span className="text-2xl font-bold tracking-tighter uppercase font-mono">
-                Aditya<span className="text-brand">Labs</span>
-              </span>
-            </div>
-            <p className="text-white/40 max-w-sm text-sm leading-relaxed">
-              An elite digital collective engineering the next generation of business systems. 
-              We solve complex problems through superior design and advanced AI integrations.
+    <footer className="border-t border-white/5 bg-dark">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Main grid */}
+        <div className="grid grid-cols-1 gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+          {/* Col 1-2: Brand & Description */}
+          <div className="sm:col-span-2">
+            <BrandLogo size="default" showSubtitle />
+
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-white/40">
+              We build quantum-grade digital experiences that push the boundaries
+              of what&apos;s possible. From AI-powered platforms to immersive
+              interfaces, we engineer the future.
             </p>
+
+            {/* Social icons */}
+            <div className="mt-6 flex items-center gap-3">
+              {socialLinks.map((social) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="flex size-10 items-center justify-center rounded-xl border border-white/6 bg-white/2 text-white/40 transition-all hover:border-white/12 hover:bg-white/5 hover:text-white/70"
+                  whileHover={{ scale: 1.08, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <social.icon className="size-4" />
+                </motion.a>
+              ))}
+            </div>
           </div>
 
+          {/* Col 3: Agency */}
           <div>
-            <h4 className="text-xs uppercase tracking-[0.3em] font-mono text-white mb-6">Platform</h4>
-            <ul className="space-y-4">
-              {['Services', 'Portfolio', 'AI Demo', 'Pricing'].map((item) => (
-                <li key={item}>
-                  <a href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-sm text-white/40 hover:text-brand transition-colors">
-                    {item}
-                  </a>
+            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/70">
+              Agency
+            </h4>
+            <ul className="space-y-2.5">
+              {agencyLinks.map((link) => (
+                <li key={link.href}>
+                  <button
+                    onClick={() => handleNavClick(link.href)}
+                    className="text-sm text-white/40 transition-colors hover:text-white/70"
+                  >
+                    {link.label}
+                  </button>
                 </li>
               ))}
             </ul>
           </div>
 
+          {/* Col 4: Resources */}
           <div>
-            <h4 className="text-xs uppercase tracking-[0.3em] font-mono text-white mb-6">Legal</h4>
-            <ul className="space-y-4">
-              {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-sm text-white/40 hover:text-brand transition-colors">
-                    {item}
-                  </a>
+            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/70">
+              Resources
+            </h4>
+            <ul className="space-y-2.5">
+              {resourceLinks.map((link) => (
+                <li key={link.href}>
+                  <button
+                    onClick={() => handleNavClick(link.href)}
+                    className="text-sm text-white/40 transition-colors hover:text-white/70"
+                  >
+                    {link.label}
+                  </button>
                 </li>
               ))}
             </ul>
           </div>
         </div>
 
-        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-mono tracking-widest text-white/30">
-          <div>© {currentYear} ADITYA LABS. ALL RIGHTS RESERVED.</div>
-          <div className="flex gap-8">
-            <a href="http://www.linkedin.com/in/aditya-kumar-b4874235b" className="hover:text-brand transition-colors">LINKEDIN</a>
-            <a href="#" className="hover:text-brand transition-colors">TWITTER</a>
-            <a href="#" className="hover:text-brand transition-colors">INSTAGRAM</a>
+        {/* Bottom bar */}
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-white/5 py-6 sm:flex-row">
+          <p className="text-xs text-white/30">
+            &copy; {new Date().getFullYear()} Aditya Labs. All rights reserved.
+          </p>
+          <div className="flex items-center gap-4">
+            <button className="text-xs text-white/30 transition-colors hover:text-white/50">
+              Terms of Service
+            </button>
+            <span className="text-white/10">|</span>
+            <button className="text-xs text-white/30 transition-colors hover:text-white/50">
+              Privacy Policy
+            </button>
           </div>
-          <div>BUILT WITH PRECISION BY ADITYA</div>
         </div>
       </div>
     </footer>
