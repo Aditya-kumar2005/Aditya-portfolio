@@ -9,8 +9,9 @@ import {
   ShieldCheck,
   Users,
 } from 'lucide-react';
+import  Image  from 'next/image';
 import prof from '../../../public/young.png'
-import young from '../../../public/prof.png' 
+import young from '../../../public/prof.png'
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -114,7 +115,7 @@ export default function Hero() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-            className="flex justify-center lg:justify-center lg:self-center"
+            className="flex justify-center lg:justify-center-safe lg:self-center"
           >
             <div className="relative w-72 h-72 md:w-80 md:h-80">
               {/* Decorative spinning rings */}
@@ -140,13 +141,15 @@ export default function Hero() {
                 whileHover={{ scale: 1.03 }}
                 transition={{ duration: 0.3 }}
               >
-                <motion.img
+                  <Image
                   src={young.src}
-                  // src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop"
                   alt="Aditya Kumar — Founder & Team Lead"
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                  loading="lazy"
-                />
+                    fill
+                    sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 320px"
+                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                    priority
+                  // loading="lazy"
+                  />
 
                 {/* Overlay with name */}
                 <div className="absolute inset-0 bg-linear-to-t from-dark/90 via-dark/30 to-transparent flex items-end justify-center pb-5">

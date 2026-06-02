@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Rocket, Award, Cpu, Linkedin, Twitter, Github } from 'lucide-react'
 import young from '../../../public/glasses.png'
+import Image from 'next/image'
 
 const features = [
   {
@@ -65,13 +66,15 @@ export default function Team() {
                 whileHover={{ scale: 1.03 }}
                 transition={{ duration: 0.3 }}
               >
-                <motion.img
+                  <Image
                   src={young.src}
-                  // src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop"
                   alt="Aditya Kumar — Founder & Team Lead" 
-                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                    fill
+                    sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 320px"
+                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                    // priority
                   loading="lazy"
-                />
+                  />
 
                 {/* Overlay with name */}
                 <div className="absolute inset-0 bg-linear-to-t from-dark/90 via-dark/30 to-transparent flex items-end justify-center pb-5">

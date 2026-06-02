@@ -43,7 +43,7 @@ const PLANS: PricingPlan[] = [
   {
     name: 'Growth',
     badge: 'MVP Launch',
-    price: '$1,499-$4,499',
+    price: '$1499-$4499',
     period: '/project',
     description:
       'Go from concept to production-ready product with full development, AI integration, and deployment.',
@@ -60,7 +60,7 @@ const PLANS: PricingPlan[] = [
   {
     name: 'Enterprise',
     badge: 'Scale & Grow',
-    price: '$4499-$8,900',
+    price: '$4499-$8900',
     period: '/project',
     description:
       'Supercharge your product with advanced AI, system optimization, and enterprise-grade scaling.',
@@ -117,7 +117,7 @@ export default function Pricing() {
               transition={{ duration: 0.5, delay: index * 0.12 }}
               className={`bento-card relative flex flex-col ${
                 plan.highlighted
-                  ? 'border-brand/40 shadow-lg shadow-brand/10 md:-mt-4 md:mb-[-1rem]'
+                  ? 'border-brand/40 shadow-lg shadow-brand/10 md:-mt-4 md:-mb-4'
                   : ''
               }`}
             >
@@ -150,7 +150,7 @@ export default function Pricing() {
                   <span className="heading-display text-4xl text-white lg:text-5xl">
                     {plan.price}
                   </span>
-                  <span className="text-sm text-white/30">{plan.period}</span>
+                  {/* <span className="text-sm text-white/30">{plan.period}</span> */}
                 </div>
               </div>
 
@@ -183,7 +183,7 @@ export default function Pricing() {
                 className={`group flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition-all active:scale-[0.97] ${
                   plan.highlighted
                     ? 'bg-brand text-white shadow-lg shadow-brand/25 hover:bg-brand-secondary hover:shadow-brand/40'
-                    : 'border border-white/[0.08] bg-white/[0.03] text-white hover:border-white/20 hover:bg-white/[0.06]'
+                    : 'border border-white/8 bg-white/3 text-white hover:border-white/20 hover:bg-white/6'
                 }`}
               >
                 {plan.cta}

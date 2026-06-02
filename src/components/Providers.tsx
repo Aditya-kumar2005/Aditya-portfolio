@@ -48,6 +48,7 @@ export default function Providers({ children }: { children: ReactNode }) {
           colorWarning: '#F59E0B',
         },
       }}
+      awaitDomContentLoaded={true}
     >
       {children}
     </ClerkProvider>

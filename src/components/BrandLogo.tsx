@@ -29,7 +29,7 @@ const sizeConfig = {
     pingOffset: 'top-0.5 right-0.5',
     gap: 'gap-2.5',
   },
-  lg: {
+   lg: {
     iconContainer: 'size-14',
     icon: 'size-7',
     title: 'text-3xl',
@@ -38,9 +38,9 @@ const sizeConfig = {
     pingOffset: 'top-1 right-1',
     gap: 'gap-3',
   },
-};
+    };
 
-export default function BrandLogo({
+  export default function BrandLogo({
   size = 'default',
   showSubtitle = true,
 }: BrandLogoProps) {
@@ -68,6 +68,14 @@ export default function BrandLogo({
           fill
           className="object-cover"
         />
+          <Image
+            src="/aditya-lab-logo.png"
+            alt="Aditya Labs logo"
+            fill
+            sizes="(max-width: 640px) 32px, (max-width: 1024px) 40px, 56px"
+            className="object-cover"
+            priority
+          />
 
         {/* Active ping dot */}
         <span className={`absolute ${config.pingOffset}`}>
