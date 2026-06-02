@@ -10,4 +10,3 @@ SETUP.md
 next-env.d.ts
 *.tsbuildinfo
 .DS_Store
-prisma/*

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://adityalabs.com";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://aditya-portfolio-9sox.vercel.app/";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
