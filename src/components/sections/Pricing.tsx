@@ -24,25 +24,26 @@ interface PricingPlan {
 
 const PLANS: PricingPlan[] = [
   {
-    name: 'Discovery',
+    name: 'Starter',
     badge: 'Discovery',
-    price: '$1,900',
+    price: '$499-$1499',
     period: '/project',
     description:
-      'Validate your idea and map out a clear path to launch with research and prototyping.',
+      'Perfect for small businesses establishing their first digital presence.',
     features: [
-      'Market Research',
-      'MVP Roadmapping',
-      'UI/UX Prototypes',
-      'Architecture Plan',
+      'Business Website',
+      'Basic Mobile Design',
+      'Contact Forms',
+      'SEO Foundations',
+      '1 Month Support'
     ],
     highlighted: false,
     cta: 'Get Started',
   },
   {
-    name: 'MVP Launch',
+    name: 'Growth',
     badge: 'MVP Launch',
-    price: '$4,500',
+    price: '$1,499-$4,499',
     period: '/project',
     description:
       'Go from concept to production-ready product with full development, AI integration, and deployment.',
@@ -51,24 +52,24 @@ const PLANS: PricingPlan[] = [
       'AI Integration',
       'Database Setup',
       'Deployment',
-      '30-Day Support',
+      '2 Month Support',
     ],
     highlighted: true,
     cta: 'Launch Your MVP',
   },
   {
-    name: 'Scale & Grow',
+    name: 'Enterprise',
     badge: 'Scale & Grow',
-    price: '$8,900',
+    price: '$4499-$8,900',
     period: '/project',
     description:
       'Supercharge your product with advanced AI, system optimization, and enterprise-grade scaling.',
     features: [
-      'Advanced AI Tools',
-      'System Optimization',
-      'Multi-tenant Scaling',
-      'Custom Automations',
-      'Priority Support',
+      'Everything in Growth',
+      'Custom RAG Systems',
+      'Full Workflow Automation',
+      'Priority Security Audit',
+      'Lifetime Updates'
     ],
     highlighted: false,
     cta: 'Scale Up',

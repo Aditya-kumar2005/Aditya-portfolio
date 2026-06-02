@@ -1,32 +1,35 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight} from 'lucide-react';
 
 const projects = [
   {
-    title: 'Klyro',
-    category: 'FINTECH',
+    title: 'NexusConnect',
+    category: 'AI-Powered WhatsApp Automation',
     description:
-      'Financial analytics platform that transforms raw data into actionable insights with real-time dashboards, predictive modeling, and automated reporting for modern finance teams.',
+      'AI-Powered WhatsApp Automation is an intelligent communication system that leverages Natural Language Processing (NLP) to fully automate customer interactions, lead qualification, and business workflows on WhatsApp around the clock.',
+    tags:['Ai automation','Whatsapp bots'],
     image:
-      'https://images.unsplash.com/photo-1611974717482-aa8665793010?auto=format&fit=crop&q=80&w=1200',
-    href: '#',
+      'https://pickyassist.com/blog/wp-content/uploads/2025/10/bLOG-IMAGE-Feedback-through-chatbots-1024x1024.png',
+    href: 'https://ai-client-interaction.vercel.app/',
   },
   {
-    title: 'Reachout',
-    category: 'MARKETING',
+    title: 'Finvault',
+    category: 'Full stack web apps',
     description:
-      'LinkedIn automation tool that streamlines outreach campaigns with smart sequencing, AI-personalized messaging, and analytics-driven engagement optimization for B2B sales teams.',
+      'Financial analytics platform that transforms raw data into actionable insights with real-time dashboards, predictive modeling, and automated reporting for modern finance teams.',
+      tags:['Websites','Web app'],
     image:
-      'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1200',
-    href: '#',
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800',
+    href: 'https://finance-app-woad-eight.vercel.app/',
   },
   {
     title: 'Taskly',
     category: 'PRODUCTIVITY',
     description:
       'Project management solution built for speed and clarity — featuring kanban boards, sprint planning, time tracking, and seamless team collaboration in one unified workspace.',
+    tags:[''],
     image:
       'https://images.unsplash.com/photo-1540350394557-8d14678e7f91?auto=format&fit=crop&q=80&w=1200',
     href: '#',
@@ -78,6 +81,13 @@ export default function Portfolio() {
                   <p className="text-white/50 text-base leading-relaxed">
                     {project.description}
                   </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag, j) => (
+                      <span key={j} className="text-[10px] uppercase tracking-widest bg-white/5 border border-white/10 px-2 py-1 rounded text-white/40">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
 
                   <motion.a
                     href={project.href}
