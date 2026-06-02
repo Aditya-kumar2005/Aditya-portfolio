@@ -128,39 +128,7 @@ export const metadata: Metadata = {
 
   category: "Technology",
 };
-// export const metadata: Metadata = {
-//   title: "Aditya Labs — Premium SaaS & AI Agency",
-//   description:
-//     "Aditya Labs is a premium, developer-led SaaS engineering and AI-integration agency. We build, launch, and scale sophisticated SaaS products with AI at their core.",
-//   keywords: [
-//     "Aditya Labs",
 
-//     "SaaS Development",
-//     "AI Integration",
-//     "Product Engineering",
-//     "Agency",
-//     "Next.js",
-//     "React",
-//     "TypeScript",
-//   ],
-//   authors: [{ name: "Aditya Kumar" }],
-//   icons: {
-//     icon: "/aditya-lab-logo.png",
-//   },
-//   openGraph: {
-//     title: "Aditya Labs — Premium SaaS & AI Agency",
-//     description:
-//       "We build, launch, and scale sophisticated SaaS products with AI at their core.",
-//     siteName: "Aditya Labs",
-//     type: "website",
-//   },
-//   twitter: {
-//     card: "summary_large_image",
-//     title: "Aditya Labs — Premium SaaS & AI Agency",
-//     description:
-//       "We build, launch, and scale sophisticated SaaS products with AI at their core.",
-//   },
-// };
 
 export default function RootLayout({
   children,
@@ -170,6 +138,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta name="google-site-verification" content="w39Kz5w2njYiHg87Ja92t2_XocOtPMLGyOs9GHYrklg" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
