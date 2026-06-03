@@ -9,13 +9,16 @@ import Hero from '@/components/sections/Hero';
 import Services from '@/components/sections/Services';
 import Process from '@/components/sections/Process';
 import Team from '@/components/sections/Team';
-import Portfolio from '@/components/sections/Portfolio';
+import CaseStudies from '@/components/sections/CaseStudies';
 import Testimonials from '@/components/sections/Testimonials';
 import AIDemo from '@/components/sections/AIDemo';
 import Pricing from '@/components/sections/Pricing';
 import Contact from '@/components/sections/Contact';
 import UnifiedDashboard from '@/components/dashboards/UnifiedDashboard';
 import { Sparkles, ShieldCheck, ArrowRight } from 'lucide-react';
+import Impact from '@/components/sections/Impact';
+import Industries from '@/components/sections/Industries';
+import TechStack from '@/components/sections/TechStack';
 
 type AppView = 'landing' | 'dashboard';
 
@@ -25,10 +28,13 @@ function LandingPage({ onNavigate }: { onNavigate: () => void }) {
       <Navbar onNavigate={onNavigate} />
       <main className="flex-1">
         <Hero />
+        <Impact />
         <Services />
+        <Industries />
         <Process />
         <Team />
-        <Portfolio />
+        <CaseStudies />
+        <TechStack />
         <Testimonials />
         <AIDemo />
         <Pricing />
@@ -154,4 +160,3 @@ export default function Home() {
     </AuthProvider>
   );
 }
-

@@ -61,10 +61,7 @@ export default function Hero() {
             <motion.div variants={itemVariants}>
               <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm text-white/70">
                 <Users className="size-4 text-brand" />
-                Trusted by{' '}
-                <span className="font-semibold text-white">
-                  50+ Modern SaaS Founders
-                </span>
+                Trusted by startups and growing businesses.
               </span>
             </motion.div>
 
@@ -73,15 +70,7 @@ export default function Hero() {
               variants={itemVariants}
               className="heading-display mt-8 max-w-2xl text-4xl leading-tight sm:text-5xl md:text-6xl lg:text-7xl"
             >
-              WE BUILD{' '}
-              <span className="bg-linear-to-r from-brand via-brand-secondary to-brand-accent bg-clip-text text-transparent">
-                PRODUCTS
-              </span>
-              <br />
-              USERS{' '}
-              <span className="bg-linear-to-r from-brand-accent to-brand bg-clip-text text-transparent">
-                CHOOSE.
-              </span>
+              We Build AI Systems That Save Businesses 20+ Hours Every Week
             </motion.h1>
 
             {/* Subtitle */}
@@ -89,8 +78,7 @@ export default function Hero() {
               variants={itemVariants}
               className="mt-6 max-w-lg text-lg text-white/50"
             >
-              From idea to launch, we craft SaaS products that scale, convert,
-              and dominate markets.
+             AI Agents • WhatsApp Automation • SaaS Development • Custom Software
             </motion.p>
 
             {/* CTA buttons */}
@@ -99,68 +87,19 @@ export default function Hero() {
               className="mt-8 flex flex-wrap items-center gap-4"
             >
               <a href="#contact" className="group inline-flex items-center gap-2 rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-brand/25 transition-all hover:bg-[#6D28D9] hover:shadow-brand/40 active:scale-[0.97]">
-                Launch My Product
+                Schedule Call
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
               </a>
               <button className="group inline-flex items-center gap-2 rounded-xl border border-white/8 bg-white/3 px-6 py-3 text-sm font-semibold text-white/80 transition-all hover:border-white/5 hover:bg-white/6 active:scale-[0.97]">
                 <Play className="size-4 text-brand" />
-                Watch Showreel
+                View Case Studies
+              </button>
+               <button className="group inline-flex items-center gap-2 rounded-xl border border-white/8 bg-white/3 px-6 py-3 text-sm font-semibold text-white/80 transition-all hover:border-white/5 hover:bg-white/6 active:scale-[0.97]">
+                <Play className="size-4 text-brand" />
+                Watch Demo
               </button>
             </motion.div>
           </div>
-
-          {/* Right: System Monitor Widget */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-            className="flex justify-center lg:justify-center-safe lg:self-center"
-          >
-            <div className="relative w-72 h-72 md:w-80 md:h-80">
-              {/* Decorative spinning rings */}
-              <motion.div
-                className="absolute inset-0 rounded-full border-2 border-brand/30"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: [0, 0, 1, 1] as const }}
-              />
-              <motion.div
-                className="absolute -inset-3 rounded-full border border-brand-accent/20 border-dashed"
-                animate={{ rotate: -360 }}
-                transition={{ duration: 30, repeat: Infinity, ease: [0, 0, 1, 1] as const }}
-              />
-              <motion.div
-                className="absolute -inset-6 rounded-full border border-white/5"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 40, repeat: Infinity, ease: [0, 0, 1, 1] as const }}
-              />
-
-              {/* Profile image with grayscale-to-color */}
-              <motion.div
-                className="relative w-full h-full rounded-full overflow-hidden"
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.3 }}
-              >
-                  <Image
-                  src={young.src}
-                  alt="Aditya Kumar — Founder & Team Lead"
-                    fill
-                    sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 320px"
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                    priority
-                  // loading="lazy"
-                  />
-
-                {/* Overlay with name */}
-                <div className="absolute inset-0 bg-linear-to-t from-dark/90 via-dark/30 to-transparent flex items-end justify-center pb-5">
-                  <div className="text-center">
-                    <p className="text-white font-display font-bold text-lg">Aditya Kumar</p>
-                    <p className="text-brand text-sm font-medium">Founder & Team Lead</p>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
         </motion.div>
 
         {/* Trusted logos */}
