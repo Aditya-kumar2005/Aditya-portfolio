@@ -10,7 +10,7 @@ import {
   Users,
 } from 'lucide-react';
 import  Image  from 'next/image';
-import prof from '../../../public/young.png'
+// import prof from '../../../public/young.png'
 import young from '../../../public/prof.png'
 
 const containerVariants: Variants = {
@@ -106,7 +106,7 @@ export default function Hero() {
               className="relative hidden flex-1 items-center justify-center lg:flex"
             >
               <Image
-                src={prof}
+                src={young}
                 alt="Aditya Labs Hero Image"
                 width={550}
                 height={550}
