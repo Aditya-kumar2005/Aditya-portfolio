@@ -5,8 +5,8 @@ import { ArrowUpRight, Plus } from 'lucide-react';
 
 const projects = [
   {
-    title: 'Dental Clinic AI Receptionist',
-    category: 'AI Automation',
+    title: 'NexusConnect',
+    category: 'AI-Powered WhatsApp Automation',
     problem:
       'A busy dental clinic was missing a significant number of patient inquiries and booking requests coming through WhatsApp after hours, leading to lost revenue and a frustrating patient experience.',
     solution:
@@ -16,10 +16,10 @@ const projects = [
     technologies: ['WhatsApp API', 'OpenAI', 'Next.js', 'Supabase'],
     image:
       'https://pickyassist.com/blog/wp-content/uploads/2025/10/bLOG-IMAGE-Feedback-through-chatbots-1024x1024.png',
-    href: '#',
+    href: 'https://ai-client-interaction.vercel.app/',
   },
   {
-    title: 'E-commerce Sales Assistant',
+    title: 'Finvault',
     category: 'SaaS Development',
     problem:
       'An e-commerce store was struggling to provide personalized recommendations and support to its customers, resulting in low conversion rates and high cart abandonment.',
@@ -30,7 +30,7 @@ const projects = [
     technologies: ['Next.js', 'TypeScript', 'Stripe', 'Pinecone'],
     image:
       'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800',
-    href: '#',
+    href: 'https://finance-app-woad-eight.vercel.app/',
   },
 ];
 

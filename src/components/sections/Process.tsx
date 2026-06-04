@@ -175,10 +175,10 @@ export default function Process() {
                 Ready to turn your vision into a product that users love? Let&apos;s
                 make it happen.
               </p>
-              <button className="group mt-6 inline-flex items-center gap-2 rounded-xl bg-brand px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-brand/25 transition-all hover:bg-[#6D28D9] hover:shadow-brand/40 active:scale-[0.97]">
+              <a href="#contact" className="group mt-6 inline-flex items-center gap-2 rounded-xl bg-brand px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-brand/25 transition-all hover:bg-[#6D28D9] hover:shadow-brand/40 active:scale-[0.97]">
                 Let&apos;s Build Together
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </button>
+              </a>
             </div>
           </div>
         </motion.div>

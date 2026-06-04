@@ -90,14 +90,14 @@ export default function Hero() {
                 Schedule Call
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
               </a>
-              <button className="group inline-flex items-center gap-2 rounded-xl border border-white/8 bg-white/3 px-6 py-3 text-sm font-semibold text-white/80 transition-all hover:border-white/5 hover:bg-white/6 active:scale-[0.97]">
+              <a href="#portfolio" className="group inline-flex items-center gap-2 rounded-xl border border-white/8 bg-white/3 px-6 py-3 text-sm font-semibold text-white/80 transition-all hover:border-white/5 hover:bg-white/6 active:scale-[0.97]">
                 <Play className="size-4 text-brand" />
                 View Case Studies
-              </button>
-               <button className="group inline-flex items-center gap-2 rounded-xl border border-white/8 bg-white/3 px-6 py-3 text-sm font-semibold text-white/80 transition-all hover:border-white/5 hover:bg-white/6 active:scale-[0.97]">
+              </a>
+              <a href="#" className="group inline-flex items-center gap-2 rounded-xl border border-white/8 bg-white/3 px-6 py-3 text-sm font-semibold text-white/80 transition-all hover:border-white/5 hover:bg-white/6 active:scale-[0.97]">
                 <Play className="size-4 text-brand" />
                 Watch Demo
-              </button>
+              </a>
             </motion.div>
           </div>
            {/* Right: Image */}
