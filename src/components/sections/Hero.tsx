@@ -101,55 +101,55 @@ export default function Hero() {
             </motion.div>
           </div>
            {/* Right: Image */}
-            <motion.div
-                      initial={{ opacity: 0, x: -40 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true, margin: '-100px' }}
-                      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-                      className="flex justify-center lg:justify-center"
-                    >
-                      <div className="relative w-72 h-72 md:w-80 md:h-80">
-                        {/* Decorative spinning rings */}
-                        <motion.div
-                          className="absolute inset-0 rounded-full border-2 border-brand/30"
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 20, repeat: Infinity, ease: [0, 0, 1, 1] as const }}
-                        />
-                        <motion.div
-                          className="absolute -inset-3 rounded-full border border-brand-accent/20 border-dashed"
-                          animate={{ rotate: -360 }}
-                          transition={{ duration: 30, repeat: Infinity, ease: [0, 0, 1, 1] as const }}
-                        />
-                        <motion.div
-                          className="absolute -inset-6 rounded-full border border-white/5"
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 40, repeat: Infinity, ease: [0, 0, 1, 1] as const }}
-                        />
-          
-                        {/* Profile image with grayscale-to-color */}
-                        <motion.div
-                          className="relative w-full h-full rounded-full overflow-hidden"
-                          whileHover={{ scale: 1.03 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                            <Image
-                            src={young}
-                            alt="Founder image" 
-                              fill
-                              sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 320px"
-                              className="w-full h-full object-cover transition-all duration-700"
-                             priority
-                            />
-          
-                          {/* Overlay with name */}
-                          <div className="absolute inset-0 bg-linear-to-t from-dark/90 via-dark/30 to-transparent flex items-end justify-center pb-5">
-                            <div className="text-center">
-                              <p className="text-white font-display font-bold text-lg">Aditya Kumar</p>
-                              <p className="text-brand text-sm font-medium">-- Founder & Team Lead</p>
-                            </div>
-                          </div>
-                        </motion.div>
-                      </div>
+           <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
+            className="flex justify-center lg:justify-center"
+            >
+            <div className="relative w-72 h-72 md:w-80 md:h-80">
+                {/* Decorative spinning rings */}
+                <motion.div
+                className="absolute inset-0 rounded-full border-2 border-brand/30"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                />
+                <motion.div
+                className="absolute -inset-3 rounded-full border border-brand-accent/20 border-dashed"
+                animate={{ rotate: -360 }}
+                transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+                />
+                <motion.div
+                className="absolute -inset-6 rounded-full border border-white/5"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+                />
+
+                {/* Profile image with grayscale-to-color */}
+                <motion.div
+                className="relative w-full h-full rounded-full overflow-hidden group"
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.3 }}
+                >
+                    <Image
+                    src={young}
+                    alt="Founder image" 
+                    fill
+                    sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 320px"
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                    priority
+                    />
+
+                {/* Overlay with name */}
+                <div className="absolute inset-0 bg-linear-to-t from-dark/90 via-dark/30 to-transparent flex items-end justify-center pb-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="text-center">
+                    <p className="text-white font-display font-bold text-lg">Aditya Kumar</p>
+                    <p className="text-brand text-sm font-medium">-- Founder & Team Lead</p>
+                    </div>
+                </div>
+                </motion.div>
+            </div>
             </motion.div>
         </motion.div>
 
