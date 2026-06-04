@@ -36,7 +36,7 @@ const projects = [
 
 export default function CaseStudies() {
   return (
-    <section className="py-24 px-4 md:px-8">
+    <section id="portfolio" className="py-24 px-4 md:px-8">
       <div className="max-w-7xl mx-auto space-y-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

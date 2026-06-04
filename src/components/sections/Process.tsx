@@ -82,7 +82,7 @@ const ctaVariants: Variants = {
 
 export default function Process() {
   return (
-    <section className="relative overflow-hidden bg-dark py-24 sm:py-32">
+    <section id="process" className="relative overflow-hidden bg-dark py-24 sm:py-32">
       {/* Background accents */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute right-0 top-1/4 h-100 w-100 rounded-full bg-brand-accent/5 blur-[120px]" />

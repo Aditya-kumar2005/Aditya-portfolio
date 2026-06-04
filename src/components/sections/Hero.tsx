@@ -100,6 +100,20 @@ export default function Hero() {
               </button>
             </motion.div>
           </div>
+           {/* Right: Image */}
+           <motion.div
+              variants={itemVariants}
+              className="relative hidden flex-1 items-center justify-center lg:flex"
+            >
+              <Image
+                src={prof}
+                alt="Aditya Labs Hero Image"
+                width={550}
+                height={550}
+                priority
+                className="rounded-full object-cover shadow-2xl shadow-brand/20"
+              />
+            </motion.div>
         </motion.div>
 
         {/* Trusted logos */}
