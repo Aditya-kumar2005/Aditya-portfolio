@@ -51,28 +51,28 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="flex items-center justify-center min-h-screen bg-dark text-white">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
+        className="w-full max-w-md p-8 space-y-8 glass rounded-2xl"
       >
         <div className="flex flex-col items-center text-center">
             <motion.div
                 animate={{ rotate: [0, 360, 0] }}
                 transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                className="p-2 bg-indigo-500 rounded-full"
+                className="p-2 bg-brand/10 rounded-full"
             >
-                <Cpu className="w-10 h-10 text-white" />
+                <Cpu className="w-10 h-10 text-brand" />
             </motion.div>
-          <h1 className="mt-4 text-3xl font-bold text-gray-900 dark:text-white">Welcome Back</h1>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Sign in to continue to your dashboard.</p>
+          <h1 className="mt-4 text-3xl font-bold">Welcome Back</h1>
+          <p className="mt-2 text-sm text-white/70">Sign in to continue to your dashboard.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="relative">
-            <Mail className="absolute w-5 h-5 text-gray-400 left-3 top-1/2 -translate-y-1/2" />
+            <Mail className="absolute w-5 h-5 text-white/40 left-3 top-1/2 -translate-y-1/2" />
             <Input
               id="email"
               name="email"
@@ -81,13 +81,13 @@ export default function LoginPage() {
               required
               value={formData.email}
               onChange={handleChange}
-              className="pl-10"
+              className="pl-10 w-full rounded-lg bg-white/5 px-4 py-3 text-white placeholder:text-white/40 border border-white/10 transition-colors focus:border-brand focus:bg-white/[0.08] outline-none"
             />
             {validationErrors.email && <p className="mt-2 text-xs text-red-500">{validationErrors.email[0]}</p>}
           </div>
 
           <div className="relative">
-            <Lock className="absolute w-5 h-5 text-gray-400 left-3 top-1/2 -translate-y-1/2" />
+            <Lock className="absolute w-5 h-5 text-white/40 left-3 top-1/2 -translate-y-1/2" />
             <Input
               id="password"
               name="password"
@@ -96,7 +96,7 @@ export default function LoginPage() {
               required
               value={formData.password}
               onChange={handleChange}
-              className="pl-10"
+              className="pl-10 w-full rounded-lg bg-white/5 px-4 py-3 text-white placeholder:text-white/40 border border-white/10 transition-colors focus:border-brand focus:bg-white/[0.08] outline-none"
             />
             {validationErrors.password && <p className="mt-2 text-xs text-red-500">{validationErrors.password[0]}</p>}
           </div>
@@ -108,7 +108,7 @@ export default function LoginPage() {
           )}
 
           <div>
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="w-full rounded-lg bg-brand px-6 py-4 font-semibold text-dark shadow-lg shadow-brand/25 transition-all hover:bg-brand-secondary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2" disabled={isLoading}>
               {isLoading ? <Loader2 className="w-5 h-5 mr-2 animate-spin" /> : <ShieldCheck className="w-5 h-5 mr-2" />}
               Sign In
             </Button>
@@ -116,13 +116,13 @@ export default function LoginPage() {
         </form>
 
         <div className="text-center">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+          <p className="text-sm text-white/70">
             Don't have an account?{' '}
-            <Link href="/register" className="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400">
+            <Link href="/register" className="font-medium text-brand hover:text-brand-secondary">
               Sign Up
             </Link>
           </p>
-          <Link href="/" className="inline-flex items-center mt-4 text-sm text-gray-600 dark:text-gray-400 hover:underline">
+          <Link href="/" className="inline-flex items-center mt-4 text-sm text-white/70 hover:underline">
             <ArrowLeft className="w-4 h-4 mr-1" />
             Back to Home
           </Link>
