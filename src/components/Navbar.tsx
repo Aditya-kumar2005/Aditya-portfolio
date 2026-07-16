@@ -2,48 +2,27 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowRight, LayoutDashboard, UserPlus, LogOut } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import BrandLogo from '@/components/BrandLogo';
-import { authClient } from '@/lib/auth-client';
-
-interface NavbarProps {
-  onNavigate?: () => void;
-}
 
 const navLinks = [
-  { label: 'Services', href: '/services' },
-  { label: 'About', href: '/about' },
-  { label: 'Portfolio', href: '/portfolio' },
-  { label: 'Testimonials', href: '/testimonials' },
-  { label: 'Pricing', href: '/pricing' },
+  { label: 'Services', href: '#services' },
+  { label: 'About', href: '#about' },
+  { label: 'Portfolio', href: '#portfolio' },
+  { label: 'Testimonials', href: '#testimonials' },
+  { label: 'Pricing', href: '#pricing' },
 ];
 
-export default function Navbar({ onNavigate }: NavbarProps) {
+export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [session, setSession] = React.useState<any>(null);
-  const [loading, setLoading] = React.useState(true);
-  const router = useRouter();
 
-  React.useEffect(() => {
-    const checkSession = async () => {
-      try {
-        const data = await authClient.getSession();
-        setSession(data.data);
-      } catch (error) {
-        console.log('No session');
-      } finally {
-        setLoading(false);
-      }
-    };
-    checkSession();
-  }, []);
-
-  const handleLogout = async () => {
-    await authClient.signOut();
-    setSession(null);
-    router.refresh();
+  const handleNavClick = (href: string) => {
+    setMobileOpen(false);
+    const el = document.querySelector(href);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -58,51 +37,21 @@ export default function Navbar({ onNavigate }: NavbarProps) {
         {/* Center: Desktop nav links */}
         <div className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => (
-            <Link
+            <button
               key={link.href}
-              href={link.href}
+              onClick={() => handleNavClick(link.href)}
               className="rounded-lg px-3.5 py-2 text-sm font-medium text-white/60 transition-colors hover:text-white hover:bg-white/4"
             >
               {link.label}
-            </Link>
+            </button>
           ))}
         </div>
 
         {/* Right: Desktop actions */}
         <div className="hidden items-center gap-3 md:flex">
-          {!loading && (
-            <>
-              {!session ? (
-                <>
-                  <Link
-                    href="/sign-in"
-                    className="rounded-lg px-3.5 py-2 text-sm font-medium text-white/60 transition-colors hover:text-white hover:bg-white/4"
-                  >
-                    Sign In
-                  </Link>
-                  <Link
-                    href="/sign-up"
-                    className="inline-flex items-center gap-2 rounded-lg border border-white/8 bg-white/3 px-4 py-2.5 text-sm font-medium text-white/70 transition-all hover:bg-white/6 hover:text-white"
-                  >
-                    <UserPlus className="size-4" />
-                    Sign Up
-                  </Link>
-                </>
-              ) : (
-                <button
-                  onClick={handleLogout}
-                  className="flex items-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium text-white/60 transition-colors hover:text-white hover:bg-white/4"
-                >
-                  <LogOut className="size-4" />
-                  Logout
-                </button>
-              )}
-            </>
-          )}
-
           {/* CTA */}
           <motion.button
-            onClick={() => router.push('/contact')}
+            onClick={() => handleNavClick('#contact')}
             className="flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-brand/25 transition-all hover:bg-brand-secondary hover:shadow-brand/40 active:scale-[0.97]"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.97 }}
@@ -148,64 +97,30 @@ export default function Navbar({ onNavigate }: NavbarProps) {
             >
               <div className="flex flex-col gap-1">
                 {navLinks.map((link, i) => (
-                  <motion.div key={link.href}>
-                    <Link
-                      href={link.href}
-                      onClick={() => setMobileOpen(false)}
-                      className="block rounded-xl px-4 py-3 text-left text-base font-medium text-white/70 transition-colors hover:bg-white/4 hover:text-white"
-                      initial={{ opacity: 0, x: -16 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.04 }}
-                    >
-                      {link.label}
-                    </Link>
-                  </motion.div>
+                  <motion.button
+                    key={link.href}
+                    onClick={() => {
+                      setMobileOpen(false);
+                      handleNavClick(link.href);
+                    }}
+                    className="block rounded-xl px-4 py-3 text-left text-base font-medium text-white/70 transition-colors hover:bg-white/4 hover:text-white"
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.04 }}
+                  >
+                    {link.label}
+                  </motion.button>
                 ))}
               </div>
 
               <div className="my-4 h-px bg-white/6" />
 
               <div className="flex flex-col gap-3">
-                {!loading && (
-                  <>
-                    {!session ? (
-                      <>
-                        <Link
-                          href="/sign-in"
-                          onClick={() => setMobileOpen(false)}
-                          className="rounded-xl px-4 py-3 text-sm font-medium text-white/70 transition-colors hover:bg-white/4 hover:text-white"
-                        >
-                          Sign In
-                        </Link>
-                        <Link
-                          href="/sign-up"
-                          onClick={() => setMobileOpen(false)}
-                          className="flex items-center justify-center gap-2 rounded-lg border border-white/8 bg-white/3 px-4 py-2.5 text-sm font-medium text-white/70 transition-all hover:bg-white/6 hover:text-white"
-                        >
-                          <UserPlus className="size-4" />
-                          Sign Up
-                        </Link>
-                      </>
-                    ) : (
-                      <button
-                        onClick={() => {
-                          setMobileOpen(false);
-                          handleLogout();
-                        }}
-                        className="flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-medium text-white/70 transition-colors hover:bg-white/4 hover:text-white"
-                      >
-                        <LogOut className="size-4" />
-                        Logout
-                      </button>
-                    )}
-                  </>
-                )}
-
                 {/* CTA */}
                 <motion.button
                   onClick={() => {
                     setMobileOpen(false);
-                    router.push('/contact');
+                    handleNavClick('#contact');
                   }}
                   className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-brand/25 transition-all hover:bg-brand-secondary"
                   whileTap={{ scale: 0.97 }}

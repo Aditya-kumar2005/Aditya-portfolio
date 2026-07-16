@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/lib/db'
-import { inquiry } from '@/lib/db/schema'
-import { desc } from 'drizzle-orm'
-import { nanoid } from 'nanoid'
+import { prisma } from '@/lib/prisma'
 
 export async function POST(request: NextRequest) {
   try {
@@ -26,22 +23,18 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const newInquiry = await db
-      .insert(inquiry)
-      .values({
-        id: nanoid(),
+    const newInquiry = await prisma.inquiry.create({
+      data: {
         name: String(name).trim(),
         email: String(email).trim().toLowerCase(),
         phone: phone ? String(phone).trim() : null,
         subject: String(subject).trim(),
         message: String(message).trim(),
         status: 'new',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      })
-      .returning()
+      },
+    })
 
-    return NextResponse.json(newInquiry[0], { status: 201 })
+    return NextResponse.json(newInquiry, { status: 201 })
   } catch (error) {
     console.error('Error creating inquiry:', error)
     return NextResponse.json(
@@ -53,10 +46,9 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   try {
-    const inquiries = await db
-      .select()
-      .from(inquiry)
-      .orderBy(desc(inquiry.createdAt))
+    const inquiries = await prisma.inquiry.findMany({
+      orderBy: { createdAt: 'desc' },
+    })
 
     return NextResponse.json({
       inquiries,

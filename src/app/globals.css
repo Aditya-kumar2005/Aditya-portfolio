@@ -97,11 +97,11 @@
 }
 
 @utility text-glow {
-  text-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
+  text-shadow: 0 0 20px rgba(60, 220, 209, 0.4);
 }
 
 @utility glass {
-  @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.08];
+  @apply bg-white/[0.02] backdrop-blur-xl border border-white/[0.05];
 }
 
 @utility grid-pattern {
