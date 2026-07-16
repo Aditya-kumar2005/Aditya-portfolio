@@ -43,48 +43,48 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* Cosmic Slate Brand Colors */
-  --color-brand: #7C3AED;
-  --color-brand-secondary: #8B5CF6;
-  --color-brand-accent: #06B6D4;
-  --color-dark: #050816;
-  --color-surface: #0B1120;
-  --color-bg-card: rgba(15, 23, 42, 0.7);
+  /* Modern Teal Brand Colors */
+  --color-brand: #3cdcd1;
+  --color-brand-secondary: #2fb9ae;
+  --color-brand-accent: #1f9591;
+  --color-dark: #0e1514;
+  --color-surface: #0f1716;
+  --color-bg-card: rgba(14, 21, 20, 0.7);
 }
 
 :root {
   --radius: 0.625rem;
-  --background: #050816;
+  --background: #0e1514;
   --foreground: #ffffff;
-  --card: #0B1120;
+  --card: #0f1716;
   --card-foreground: #ffffff;
-  --popover: #0B1120;
+  --popover: #0f1716;
   --popover-foreground: #ffffff;
-  --primary: #7C3AED;
-  --primary-foreground: #ffffff;
-  --secondary: #0F172A;
+  --primary: #3cdcd1;
+  --primary-foreground: #0e1514;
+  --secondary: #0f1716;
   --secondary-foreground: #ffffff;
-  --muted: #1E293B;
+  --muted: #1a2221;
   --muted-foreground: rgba(255, 255, 255, 0.5);
-  --accent: #06B6D4;
-  --accent-foreground: #ffffff;
+  --accent: #3cdcd1;
+  --accent-foreground: #0e1514;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: rgba(255, 255, 255, 0.08);
-  --input: rgba(255, 255, 255, 0.1);
-  --ring: #7C3AED;
-  --chart-1: #7C3AED;
-  --chart-2: #06B6D4;
-  --chart-3: #8B5CF6;
+  --border: rgba(60, 220, 209, 0.1);
+  --input: rgba(60, 220, 209, 0.1);
+  --ring: #3cdcd1;
+  --chart-1: #3cdcd1;
+  --chart-2: #2fb9ae;
+  --chart-3: #1f9591;
   --chart-4: #10B981;
   --chart-5: #F59E0B;
-  --sidebar: #0B1120;
+  --sidebar: #0f1716;
   --sidebar-foreground: #ffffff;
-  --sidebar-primary: #7C3AED;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #1E293B;
+  --sidebar-primary: #3cdcd1;
+  --sidebar-primary-foreground: #0e1514;
+  --sidebar-accent: #1a2221;
   --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: rgba(255, 255, 255, 0.08);
-  --sidebar-ring: #7C3AED;
+  --sidebar-border: rgba(60, 220, 209, 0.1);
+  --sidebar-ring: #3cdcd1;
 }
 
 @layer base {
@@ -97,11 +97,11 @@
 }
 
 @utility text-glow {
-  text-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
+  text-shadow: 0 0 20px rgba(60, 220, 209, 0.4);
 }
 
 @utility glass {
-  @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.08];
+  @apply bg-white/[0.02] backdrop-blur-xl border border-white/[0.05];
 }
 
 @utility grid-pattern {

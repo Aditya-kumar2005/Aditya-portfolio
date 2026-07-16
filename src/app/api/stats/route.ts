@@ -1,29 +1,29 @@
 import { NextResponse } from "next/server"
-import { db } from "@/lib/db"
-import { getMemoryStats } from "@/lib/inquiry-store"
+import { prisma } from "@/lib/prisma"
 
 export async function GET() {
   try {
-    const totalInquiries = await db.inquiry.count()
+    const totalInquiries = await prisma.inquiry.count()
 
-    const statusCounts = {
-      PENDING: await db.inquiry.count({ where: { status: "PENDING" } }),
-      REVIEWED: await db.inquiry.count({ where: { status: "REVIEWED" } }),
-      REPLIED: await db.inquiry.count({ where: { status: "REPLIED" } }),
-      ARCHIVED: await db.inquiry.count({ where: { status: "ARCHIVED" } }),
-    }
+    const newCount = await prisma.inquiry.count({ where: { status: 'new' } })
+    const reviewedCount = await prisma.inquiry.count({ where: { status: 'reviewed' } })
+    const repliedCount = await prisma.inquiry.count({ where: { status: 'replied' } })
+    const archivedCount = await prisma.inquiry.count({ where: { status: 'archived' } })
 
     return NextResponse.json({
       totalInquiries,
-      statusCounts,
-      source: "DATABASE",
+      statusCounts: {
+        new: newCount,
+        reviewed: reviewedCount,
+        replied: repliedCount,
+        archived: archivedCount,
+      },
     })
-  } catch (dbError) {
-    console.error("Database error, falling back to memory:", dbError)
-
-    // Fallback to in-memory store
-    const stats = getMemoryStats()
-
-    return NextResponse.json(stats)
+  } catch (error) {
+    console.error("Error fetching stats:", error)
+    return NextResponse.json(
+      { error: "Failed to fetch stats" },
+      { status: 500 }
+    )
   }
 }
