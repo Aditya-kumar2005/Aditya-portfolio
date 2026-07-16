@@ -108,10 +108,7 @@ export default function Team() {
 
             {/* Description */}
             <p className="text-white/60 text-base md:text-lg leading-relaxed max-w-xl">
-              With over a decade of experience building and scaling SaaS products,
-              I lead a team that transforms complex ideas into elegant, market-leading
-              solutions. Our focus on strategic growth and cutting-edge technology
-              ensures every product we build is positioned for success.
+              As a passionate software developer and AI enthusiast, my vision is to build an agency that doesn&apos;t just deliver code, but creates intelligent, impactful, and future-ready solutions. I believe in the transformative power of AI and I&apos;m dedicated to leading a team that shares this passion, turning ambitious ideas into reality.
             </p>
 
             {/* Feature highlights */}
@@ -164,4 +161,3 @@ export default function Team() {
     </section>
   )
 }
-

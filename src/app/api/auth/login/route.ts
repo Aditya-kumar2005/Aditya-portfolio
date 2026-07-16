@@ -2,50 +2,61 @@
 import { NextResponse } from 'next/server';
 import { compare } from 'bcryptjs';
 import { PrismaClient } from '@prisma/client';
-import { sign } from 'jsonwebtoken';
-import { cookies } from 'next/headers';
+import { signJWT } from '@/lib/jwt';
 
 const prisma = new PrismaClient();
-const SECRET_KEY = process.env.JWT_SECRET || 'your-secret-key';
 
 export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();
 
-    let user;
-    let role = 'USER';
+    let user: { id: string; email: string; name: string | null };
+    let role: 'USER' | 'ADMIN' = 'USER';
 
-    if (email === 'nanuadityakumar@gmail.com') {
-      const adminPassword = process.env.ADMIN_PASSWORD || 'password';
-      if (password === adminPassword) {
+    if (email === process.env.ADMIN_EMAIL) {
+      if (password === process.env.ADMIN_PASSWORD) {
         role = 'ADMIN';
         user = { id: 'admin', email, name: 'Admin' };
       } else {
         return new NextResponse('Invalid credentials', { status: 401 });
       }
     } else {
-      user = await prisma.user.findUnique({ where: { email } });
+      const foundUser = await prisma.user.findUnique({ where: { email } });
 
-      if (!user) {
+      if (!foundUser) {
         return new NextResponse('Invalid credentials', { status: 401 });
       }
 
-      const isPasswordValid = await compare(password, user.password);
+      const isPasswordValid = await compare(password, foundUser.password);
 
       if (!isPasswordValid) {
         return new NextResponse('Invalid credentials', { status: 401 });
       }
+      user = foundUser;
     }
 
-    const token = sign({ userId: user.id, role, email: user.email }, SECRET_KEY, {
-      expiresIn: '1h',
+    // Create the token using the consistent signJWT function
+    const token = await signJWT({
+      id: user.id,
+      role,
+      email: user.email,
     });
 
     const response = NextResponse.json({ message: 'Logged in successfully' });
-    response.cookies.set('session-token', token, { httpOnly: true });
+
+    // Set the cookie on the response
+    response.cookies.set('session-token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/',
+      // The expiration is set within the JWT, but you can also set it on the cookie
+      // maxAge: 60 * 30, // 30 minutes
+    });
 
     return response;
   } catch (error: any) {
-    return new NextResponse(error.message, { status: 500 });
+    console.error('Login Error:', error);
+    return new NextResponse('An internal server error occurred', { status: 500 });
   }
 }
