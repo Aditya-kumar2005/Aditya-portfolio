@@ -24,8 +24,7 @@ model Inquiry {
   id        String   @id @default(cuid())
   name      String
   email     String
-  phone     String?
-  subject   String
+  service   String
   message   String
   status    String   @default("new")
   createdAt DateTime @default(now())
