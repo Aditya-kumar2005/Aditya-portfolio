@@ -1,111 +1,50 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
-import bcrypt from 'bcryptjs';
-import { signJWT } from '@/lib/jwt';
 
-const ADMIN_EMAIL = 'nanuadityakumar@gmail.com';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'AdityaLab@2026';
+import { NextResponse } from 'next/server';
+import { compare } from 'bcryptjs';
+import { PrismaClient } from '@prisma/client';
+import { sign } from 'jsonwebtoken';
+import { cookies } from 'next/headers';
 
-export async function POST(request: NextRequest) {
+const prisma = new PrismaClient();
+const SECRET_KEY = process.env.JWT_SECRET || 'your-secret-key';
+
+export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const { email, password } = body;
+    const { email, password } = await request.json();
 
-    if (!email || !password) {
-      return NextResponse.json(
-        { error: 'Email and password are required' },
-        { status: 400 }
-      );
-    }
+    let user;
+    let role = 'USER';
 
-    const emailClean = String(email).trim().toLowerCase();
-
-    // 1. Check if Admin Login
-    if (emailClean === ADMIN_EMAIL) {
-      if (password === ADMIN_PASSWORD) {
-        const payload = {
-          id: 'admin-id',
-          email: ADMIN_EMAIL,
-          name: 'Aditya Kumar',
-          role: 'ADMIN',
-        };
-
-        const token = await signJWT(payload);
-        const response = NextResponse.json({
-          message: 'Admin signed in successfully',
-          user: payload,
-        });
-
-        // Set secure HTTP-only cookie
-        response.cookies.set({
-          name: 'session-token',
-          value: token,
-          httpOnly: true,
-          secure: process.env.NODE_ENV === 'production',
-          sameSite: 'lax',
-          path: '/',
-          maxAge: 60 * 60 * 24 * 7, // 7 days
-        });
-
-        return response;
+    if (email === 'nanuadityakumar@gmail.com') {
+      const adminPassword = process.env.ADMIN_PASSWORD || 'password';
+      if (password === adminPassword) {
+        role = 'ADMIN';
+        user = { id: 'admin', email, name: 'Admin' };
       } else {
-        return NextResponse.json(
-          { error: 'Invalid admin credentials' },
-          { status: 401 }
-        );
+        return new NextResponse('Invalid credentials', { status: 401 });
+      }
+    } else {
+      user = await prisma.user.findUnique({ where: { email } });
+
+      if (!user) {
+        return new NextResponse('Invalid credentials', { status: 401 });
+      }
+
+      const isPasswordValid = await compare(password, user.password);
+
+      if (!isPasswordValid) {
+        return new NextResponse('Invalid credentials', { status: 401 });
       }
     }
 
-    // 2. Regular User Login
-    const user = await prisma.user.findUnique({
-      where: { email: emailClean },
+    const token = sign({ userId: user.id, role, email: user.email }, SECRET_KEY, {
+      expiresIn: '1h',
     });
 
-    if (!user || !user.password) {
-      return NextResponse.json(
-        { error: 'Invalid email or password' },
-        { status: 401 }
-      );
-    }
+    cookies().set('session-token', token, { httpOnly: true });
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return NextResponse.json(
-        { error: 'Invalid email or password' },
-        { status: 401 }
-      );
-    }
-
-    const payload = {
-      id: user.id,
-      email: user.email,
-      name: user.name || 'User',
-      role: 'USER',
-    };
-
-    const token = await signJWT(payload);
-    const response = NextResponse.json({
-      message: 'Login successful',
-      user: payload,
-    });
-
-    // Set secure HTTP-only cookie
-    response.cookies.set({
-      name: 'session-token',
-      value: token,
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      path: '/',
-      maxAge: 60 * 60 * 24 * 7, // 7 days
-    });
-
-    return response;
-  } catch (error) {
-    console.error('Login API error:', error);
-    return NextResponse.json(
-      { error: 'An error occurred during login' },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: 'Logged in successfully' });
+  } catch (error: any) {
+    return new NextResponse(error.message, { status: 500 });
   }
 }

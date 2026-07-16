@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Twitter, Github, Linkedin, Instagram } from 'lucide-react';
 import BrandLogo from '@/components/BrandLogo';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const socialLinks = [
   { icon: Github, href: 'https://github.com/Aditya-kumar2005', label: 'GitHub' },
@@ -23,6 +24,32 @@ const resourceLinks = [
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ];
+
+const NavLink = ({ href, label }: { href: string; label: string }) => {
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    if (isHomePage) {
+      e.preventDefault();
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  return (
+    <Link
+      href={href}
+      onClick={isHomePage ? handleClick : undefined}
+      className="text-sm text-white/40 transition-colors hover:text-white/70"
+    >
+      {label}
+    </Link>
+  );
+};
 
 export default function Footer() {
   return (
@@ -69,12 +96,7 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {agencyLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/40 transition-colors hover:text-white/70"
-                  >
-                    {link.label}
-                  </Link>
+                  <NavLink href={link.href} label={link.label} />
                 </li>
               ))}
             </ul>
@@ -88,12 +110,7 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {resourceLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/40 transition-colors hover:text-white/70"
-                  >
-                    {link.label}
-                  </Link>
+                  <NavLink href={link.href} label={link.label} />
                 </li>
               ))}
             </ul>
