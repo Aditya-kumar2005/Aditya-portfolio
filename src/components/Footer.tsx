@@ -2,42 +2,29 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import {
-  Twitter,
-  Github,
-  Linkedin,
-  Instagram,
-} from 'lucide-react';
+import { Twitter, Github, Linkedin, Instagram } from 'lucide-react';
 import BrandLogo from '@/components/BrandLogo';
+import Link from 'next/link';
 
 const socialLinks = [
-  // { icon: Twitter, href: '#', label: 'Twitter' },
   { icon: Github, href: 'https://github.com/Aditya-kumar2005', label: 'GitHub' },
   { icon: Linkedin, href: 'http://www.linkedin.com/in/aditya-kumar-b4874235b', label: 'LinkedIn' },
-  // { icon: Instagram, href: '#', label: 'Instagram' },
 ];
 
 const agencyLinks = [
-  { label: 'Services', href: '#services' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Process', href: '#process' },
-  { label: 'Expertise', href: '#expertise' },
+  { label: 'Services', href: '/services' },
+  { label: 'Process', href: '/process' },
+  { label: 'Portfolio', href: '/portfolio' },
+  { label: 'Testimonials', href: '/testimonials' },
 ];
 
 const resourceLinks = [
-  { label: 'Pricing', href: '#pricing' },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Privacy', href: '#privacy' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export default function Footer() {
-  const handleNavClick = (href: string) => {
-    const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <footer className="border-t border-white/5 bg-dark">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -45,7 +32,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {/* Col 1-2: Brand & Description */}
           <div className="sm:col-span-2">
-            <BrandLogo size="default" showSubtitle />
+            <Link href="/">
+              <BrandLogo size="default" showSubtitle />
+            </Link>
 
             <p className="mt-4 max-w-md text-sm leading-relaxed text-white/40">
               We build quantum-grade digital experiences that push the boundaries
@@ -59,6 +48,8 @@ export default function Footer() {
                 <motion.a
                   key={social.label}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={social.label}
                   className="flex size-10 items-center justify-center rounded-xl border border-white/6 bg-white/2 text-white/40 transition-all hover:border-white/12 hover:bg-white/5 hover:text-white/70"
                   whileHover={{ scale: 1.08, y: -2 }}
@@ -78,12 +69,12 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {agencyLinks.map((link) => (
                 <li key={link.href}>
-                  <button
-                    onClick={() => handleNavClick(link.href)}
+                  <Link
+                    href={link.href}
                     className="text-sm text-white/40 transition-colors hover:text-white/70"
                   >
                     {link.label}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -97,12 +88,12 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {resourceLinks.map((link) => (
                 <li key={link.href}>
-                  <button
-                    onClick={() => handleNavClick(link.href)}
+                  <Link
+                    href={link.href}
                     className="text-sm text-white/40 transition-colors hover:text-white/70"
                   >
                     {link.label}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -115,13 +106,13 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Aditya Labs. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <button className="text-xs text-white/30 transition-colors hover:text-white/50">
+            <Link href="/" className="text-xs text-white/30 transition-colors hover:text-white/50">
               Terms of Service
-            </button>
+            </Link>
             <span className="text-white/10">|</span>
-            <button className="text-xs text-white/30 transition-colors hover:text-white/50">
+            <Link href="/" className="text-xs text-white/30 transition-colors hover:text-white/50">
               Privacy Policy
-            </button>
+            </Link>
           </div>
         </div>
       </div>

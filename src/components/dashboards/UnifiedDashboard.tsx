@@ -320,7 +320,10 @@ export default function UnifiedDashboard({ onBack }: UnifiedDashboardProps) {
   }, []);
 
   useEffect(() => {
-    fetchData();
+    const timer = setTimeout(() => {
+      fetchData();
+    }, 0);
+    return () => clearTimeout(timer);
   }, [fetchData]);
 
   const handleToggleStatus = async (id: string, currentStatus: InquiryStatus) => {

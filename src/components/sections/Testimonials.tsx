@@ -40,7 +40,7 @@ const partnerLogos = [
 
 export default function Testimonials() {
   return (
-    <section className="py-24 px-4 md:px-8">
+    <section id="testimonials" className="py-24 px-4 md:px-8">
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Section Header */}
         <motion.div

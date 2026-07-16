@@ -57,9 +57,7 @@ export default function AIDemo() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    setMessages(demos[activeDemo].initialMessages);
-  }, [activeDemo]);
+
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -149,7 +147,11 @@ export default function AIDemo() {
               return (
                 <button
                   key={demo.title}
-                  onClick={() => setActiveDemo(index)}
+                  onClick={() => {
+                    setActiveDemo(index);
+                    setMessages(demos[index].initialMessages);
+                    setError(null);
+                  }}
                   className={`group flex items-start gap-4 rounded-xl border p-4 text-left transition-all ${activeDemo === index ? 'border-brand/50 bg-brand/10' : 'border-white/10 bg-white/5 hover:bg-white/10'}`}>
                   <span className={`flex size-10 shrink-0 items-center justify-center rounded-lg ${activeDemo === index ? 'bg-brand/20 text-brand' : 'bg-white/10 text-white/60 group-hover:bg-brand/20 group-hover:text-brand'}`}>
                     <Icon className="size-5" />

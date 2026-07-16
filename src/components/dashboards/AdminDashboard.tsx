@@ -635,7 +635,10 @@ export default function AdminDashboard({ onBack }: AdminDashboardProps) {
 
   useEffect(() => {
     if (isAuthorized) {
-      fetchData();
+      const timer = setTimeout(() => {
+        fetchData();
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [isAuthorized, fetchData]);
 
