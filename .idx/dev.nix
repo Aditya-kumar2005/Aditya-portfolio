@@ -5,7 +5,8 @@
   ];
   idx.extensions = [
     
-  ];
+  
+ "google.gemini-cli-vscode-ide-companion"];
   idx.previews = {
     previews = {
       web = {

@@ -1,66 +1,60 @@
-
 import { SignJWT, jwtVerify } from 'jose';
-import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
-const secretKey = process.env.JWT_SECRET || 'your-secret-key';
+const secretKey = process.env.JWT_SECRET || 'fallback-secret-key'; // Use a fallback for safety
 const key = new TextEncoder().encode(secretKey);
 
-export async function encrypt(payload: any) {
+// More specific payload type
+interface UserJWTPayload {
+  id: string;
+  email: string;
+  role: 'ADMIN' | 'USER';
+  [key: string]: any; // Allow other properties
+}
+
+// Renamed from `encrypt` for clarity to `signJWT`
+export async function signJWT(payload: UserJWTPayload) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
-    .setExpirationTime('10 min from now')
+    .setExpirationTime('30m') // Set a reasonable expiration time, e.g., 30 minutes
     .sign(key);
 }
 
-export async function decrypt(input: string): Promise<any> {
+// Renamed from `decrypt` to `verifyJWT`
+export async function verifyJWT(token: string): Promise<UserJWTPayload | null> {
   try {
-    const { payload } = await jwtVerify(input, key, {
+    const { payload } = await jwtVerify(token, key, {
       algorithms: ['HS256'],
     });
-    return payload;
+    return payload as UserJWTPayload;
   } catch (error) {
+    // Log the error for debugging purposes
+    console.error("JWT Verification Error:", error);
     return null;
   }
 }
 
-export async function login(formData: FormData) {
-  // Verify credentials && get user
-  const user = { email: formData.get('email'), name: 'John Doe' };
+/**
+ * Updates the session by extending the expiration time of the session token.
+ * This should be called in the middleware for any authenticated user activity.
+ */
+export async function updateSession(request: NextRequest, response: NextResponse, payload: UserJWTPayload) {
+  const now = new Date();
+  const newExpires = new Date(now.getTime() + 30 * 60 * 1000); // Extend by 30 minutes
 
-  // Create the session
-  const expires = new Date(Date.now() + 10 * 1000);
-  const session = await encrypt({ user, expires });
+  // Re-sign the token with the new expiration time
+  const newToken = await signJWT({ ...payload, exp: newExpires.getTime() / 1000 });
 
-  // Save the session in a cookie
-  cookies().set('session', session, { expires, httpOnly: true });
-}
-
-export async function logout() {
-  // Destroy the session
-  cookies().set('session', '', { expires: new Date(0) });
-}
-
-export async function getSession() {
-  const session = cookies().get('session')?.value;
-  if (!session) return null;
-  return await decrypt(session);
-}
-
-export async function updateSession(request: NextRequest) {
-  const session = request.cookies.get('session')?.value;
-  if (!session) return;
-
-  // Refresh the session so it doesn't expire
-  const parsed = await decrypt(session);
-  parsed.expires = new Date(Date.now() + 10 * 1000);
-  const res = NextResponse.next();
-  res.cookies.set({
-    name: 'session',
-    value: await encrypt(parsed),
+  response.cookies.set('session-token', newToken, {
     httpOnly: true,
-    expires: parsed.expires,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    expires: newExpires,
+    path: '/',
   });
-  return res;
+
+  return response;
 }
+
+export default { signJWT, verifyJWT, updateSession };

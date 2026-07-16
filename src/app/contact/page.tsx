@@ -1,41 +1,52 @@
+
 'use client';
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Linkedin, Github, Twitter } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Linkedin, Github, Twitter, Loader2 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
+import { z } from 'zod';
+import { InquirySchema } from '@/lib/validators';
+
+type FormData = z.infer<typeof InquirySchema>;
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: '',
-  });
+  const [formData, setFormData] = useState<FormData>({ name: '', email: '', message: '' });
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [validationErrors, setValidationErrors] = useState<Record<string, string[]>>({});
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    setValidationErrors({});
+
+    const result = InquirySchema.safeParse(formData);
+
+    if (!result.success) {
+      setValidationErrors(result.error.flatten().fieldErrors);
+      setLoading(false);
+      return;
+    }
 
     try {
       const res = await fetch('/api/inquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(result.data),
       });
 
       if (res.ok) {
         setSubmitted(true);
-        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+        setFormData({ name: '', email: '', message: '' });
         setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        const errorData = await res.json();
+        // Handle server-side validation errors if any
       }
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -57,10 +68,10 @@ export default function ContactPage() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="heading-display mb-6 text-5xl md:text-6xl lg:text-7xl">
-              Let&apos;s <span className="text-brand">Connect</span>
+              Let's <span className="text-brand">Connect</span>
             </h1>
             <p className="mx-auto max-w-2xl text-lg text-white/70">
-              Have a question or ready to start a project? We&apos;d love to hear from you.
+              Have a question or ready to start a project? We'd love to hear from you.
             </p>
           </motion.div>
 
@@ -157,6 +168,7 @@ export default function ContactPage() {
                       className="w-full rounded-lg bg-white/5 px-4 py-3 text-white placeholder:text-white/40 border border-white/10 transition-colors focus:border-brand focus:bg-white/[0.08] outline-none"
                       placeholder="Your name"
                     />
+                    {validationErrors.name && <p className="mt-2 text-xs text-red-500">{validationErrors.name[0]}</p>}
                   </div>
 
                   {/* Email */}
@@ -171,35 +183,7 @@ export default function ContactPage() {
                       className="w-full rounded-lg bg-white/5 px-4 py-3 text-white placeholder:text-white/40 border border-white/10 transition-colors focus:border-brand focus:bg-white/[0.08] outline-none"
                       placeholder="your@email.com"
                     />
-                  </div>
-                </div>
-
-                <div className="grid gap-6 md:grid-cols-2">
-                  {/* Phone */}
-                  <div>
-                    <label className="block mb-2 text-sm font-medium">Phone</label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full rounded-lg bg-white/5 px-4 py-3 text-white placeholder:text-white/40 border border-white/10 transition-colors focus:border-brand focus:bg-white/[0.08] outline-none"
-                      placeholder="+1 (234) 567-890"
-                    />
-                  </div>
-
-                  {/* Subject */}
-                  <div>
-                    <label className="block mb-2 text-sm font-medium">Subject</label>
-                    <input
-                      type="text"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      className="w-full rounded-lg bg-white/5 px-4 py-3 text-white placeholder:text-white/40 border border-white/10 transition-colors focus:border-brand focus:bg-white/[0.08] outline-none"
-                      placeholder="Project inquiry"
-                    />
+                    {validationErrors.email && <p className="mt-2 text-xs text-red-500">{validationErrors.email[0]}</p>}
                   </div>
                 </div>
 
@@ -215,6 +199,7 @@ export default function ContactPage() {
                     className="w-full rounded-lg bg-white/5 px-4 py-3 text-white placeholder:text-white/40 border border-white/10 transition-colors focus:border-brand focus:bg-white/[0.08] outline-none resize-none"
                     placeholder="Tell us about your project..."
                   />
+                  {validationErrors.message && <p className="mt-2 text-xs text-red-500">{validationErrors.message[0]}</p>}
                 </div>
 
                 {/* Submit Button */}
@@ -225,8 +210,8 @@ export default function ContactPage() {
                   whileHover={!loading ? { scale: 1.02 } : {}}
                   whileTap={!loading ? { scale: 0.98 } : {}}
                 >
-                  {loading ? 'Sending...' : 'Send Message'}
-                  {!loading && <Send className="size-5" />}
+                  {loading ? <Loader2 className="w-5 h-5 mr-2 animate-spin" /> : <Send className="w-5 h-5 mr-2" />}
+                  Send Message
                 </motion.button>
               </form>
             </motion.div>
