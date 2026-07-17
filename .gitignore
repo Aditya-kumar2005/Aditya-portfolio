@@ -6,7 +6,8 @@ node_modules/
 .env.example
 .env.local
 *.log
-SETUP.md
+*.md
+!README.md
 next-env.d.ts
 *.tsbuildinfo
 .DS_Store
