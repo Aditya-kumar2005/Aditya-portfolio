@@ -11,3 +11,8 @@ node_modules/
 next-env.d.ts
 *.tsbuildinfo
 .DS_Store
+
+*.md
+*.txt
+!README.md
+!robots.txt
