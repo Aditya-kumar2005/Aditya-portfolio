@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Plus } from 'lucide-react';
+// import image1 from '../../../public/whatsapp.png';
 
 const projects = [
   {
@@ -15,7 +16,7 @@ const projects = [
       'The AI receptionist achieved a 60% faster response time, leading to a 40% increase in patient bookings and a 95% patient satisfaction rate. The clinic was able to capture previously missed opportunities and improve overall efficiency.',
     technologies: ['WhatsApp API', 'OpenAI', 'Next.js', 'Supabase'],
     image:
-      'https://pickyassist.com/blog/wp-content/uploads/2025/10/bLOG-IMAGE-Feedback-through-chatbots-1024x1024.png',
+      'https://aiwens.in/images/blog/how-to-automate-whatsapp-for-business.png',
     href: 'https://ai-client-interaction.vercel.app/',
   },
   {
