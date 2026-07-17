@@ -25,9 +25,10 @@ const jetbrainsMono = JetBrains_Mono({
   fallback: ["Consolas", "Monaco", "monospace"],
 });
 
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://adityalabs.com";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://adityalabs.com"),
+  metadataBase: new URL(BASE_URL),
 
   title: {
     default: "Aditya Labs | AI Automation, SaaS & Software Development Agency",
@@ -44,7 +45,6 @@ export const metadata: Metadata = {
     "AI Agents",
     "AI Chatbots",
     "WhatsApp Automation",
-    "WhatsApp AI",
     "CRM Integration",
     "Lead Generation Automation",
     "Business Automation",
@@ -57,7 +57,6 @@ export const metadata: Metadata = {
     "React Development",
     "TypeScript",
     "n8n Automation",
-    "Vapi AI",
     "Voice AI Agents",
     "Customer Support AI",
     "Sales Automation",
@@ -71,7 +70,7 @@ export const metadata: Metadata = {
   authors: [
     {
       name: "Aditya Kumar",
-      url: "https://adityalabs.com",
+      url: BASE_URL,
     },
   ],
 
@@ -100,7 +99,7 @@ export const metadata: Metadata = {
     title: "Aditya Labs | AI Automation & Software Development Agency",
     description:
       "Build AI-powered businesses with Aditya Labs. We create AI Agents, WhatsApp Automation, SaaS Platforms, Mobile Apps, Websites, CRM Integrations, and Enterprise Automation Systems.",
-    url: "https://adityalabs.com",
+    url: BASE_URL,
     siteName: "Aditya Labs",
     type: "website",
     locale: "en_US",
@@ -123,12 +122,11 @@ export const metadata: Metadata = {
   },
 
   alternates: {
-    canonical: "https://adityalabs.com",
+    canonical: BASE_URL,
   },
 
   category: "Technology",
 };
-
 
 export default function RootLayout({
   children,
@@ -138,39 +136,41 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="google-site-verification" content="w39Kz5w2njYiHg87Ja92t2_XocOtPMLGyOs9GHYrklg" />
+        <meta
+          name="google-site-verification"
+          content="w39Kz5w2njYiHg87Ja92t2_XocOtPMLGyOs9GHYrklg"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        name: "Aditya Labs",
-        url: "https://adityalabs.com",
-        logo: "https://adityalabs.com/aditya-lab-logo.png",
-        description:
-          "AI Automation, SaaS Development, Web Development, Mobile Apps, AI Agents, WhatsApp Automation, CRM Integration and Business Automation Solutions.",
-        founder: {
-          "@type": "Person",
-          name: "Aditya Kumar",
-        },
-        sameAs: [
-          "https://linkedin.com/company/adityalabs",
-          "https://github.com/adityalabs",
-          "https://x.com/adityalabs"
-        ],
-          }),
-        }}
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Aditya Labs",
+              url: BASE_URL,
+              logo: `${BASE_URL}/aditya-lab-logo.png`,
+              description:
+                "AI Automation, SaaS Development, Web Development, Mobile Apps, AI Agents, WhatsApp Automation, CRM Integration and Business Automation Solutions.",
+              founder: {
+                "@type": "Person",
+                name: "Aditya Kumar",
+                email: "mailto:adityalabs87@gmail.com",
+              },
+              sameAs: [
+                "https://www.linkedin.com/in/aditya-kumar-b4874235b",
+                "https://github.com/Aditya-kumar2005",
+                "https://x.com/adityalabs",
+              ],
+            }),
+          }}
         />
       </head>
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased bg-dark text-white selection:bg-brand selection:text-white`}
       >
-        <Providers>
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
         <Toaster richColors position="top-right" />
       </body>
-      </html>
+    </html>
   );
 }

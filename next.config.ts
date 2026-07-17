@@ -11,7 +11,6 @@ const nextConfig: NextConfig = {
   // Turbopack optimizations for Clerk
   experimental: {
     // Ensure proper code splitting for dynamic imports
-    optimizePackageImports: ['@clerk/nextjs'],
   },
   // Empty Turbopack config (Turbopack is default in Next.js 16)
   turbopack: {},

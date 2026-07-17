@@ -1,10 +1,10 @@
 import type { MetadataRoute } from "next";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://adityalabs.com";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
-    { url: "", priority: 1.0, changeFrequency: "weekly" as const },
+    { url: "/", priority: 1.0, changeFrequency: "weekly" as const },
     { url: "/services", priority: 0.9, changeFrequency: "weekly" as const },
     { url: "/process", priority: 0.9, changeFrequency: "weekly" as const },
     { url: "/about", priority: 0.8, changeFrequency: "weekly" as const },
