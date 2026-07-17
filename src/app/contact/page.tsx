@@ -165,7 +165,7 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full rounded-lg bg-white/5 px-4 py-3 text-white placeholder:text-white/40 border border-white/10 transition-colors focus:border-brand focus:bg-white/[0.08] outline-none"
+                      className="w-full rounded-lg bg-white/5 px-4 py-3 text-white placeholder:text-white/40 border border-white/10 transition-colors focus:border-brand focus:bg-white/8 outline-none"
                       placeholder="Your name"
                     />
                     {validationErrors.name && <p className="mt-2 text-xs text-red-500">{validationErrors.name[0]}</p>}
@@ -180,7 +180,7 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full rounded-lg bg-white/5 px-4 py-3 text-white placeholder:text-white/40 border border-white/10 transition-colors focus:border-brand focus:bg-white/[0.08] outline-none"
+                      className="w-full rounded-lg bg-white/5 px-4 py-3 text-white placeholder:text-white/40 border border-white/10 transition-colors focus:border-brand focus:bg-white/8 outline-none"
                       placeholder="your@email.com"
                     />
                     {validationErrors.email && <p className="mt-2 text-xs text-red-500">{validationErrors.email[0]}</p>}
@@ -196,7 +196,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full rounded-lg bg-white/5 px-4 py-3 text-white placeholder:text-white/40 border border-white/10 transition-colors focus:border-brand focus:bg-white/[0.08] outline-none resize-none"
+                    className="w-full rounded-lg bg-white/5 px-4 py-3 text-white placeholder:text-white/40 border border-white/10 transition-colors focus:border-brand focus:bg-white/8 outline-none resize-none"
                     placeholder="Tell us about your project..."
                   />
                   {validationErrors.message && <p className="mt-2 text-xs text-red-500">{validationErrors.message[0]}</p>}

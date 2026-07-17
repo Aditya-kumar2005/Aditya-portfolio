@@ -103,7 +103,7 @@ export default function TestimonialsPage() {
 
           {/* CTA Section */}
           <motion.div
-            className="mt-20 rounded-2xl bg-gradient-to-r from-brand/20 to-transparent p-12 text-center"
+            className="mt-20 rounded-2xl bg-linear-to-r from-brand/20 to-transparent p-12 text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
@@ -133,7 +133,7 @@ export default function TestimonialsPage() {
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}
-                className="rounded-xl bg-white/[0.03] p-8"
+                className="rounded-xl bg-white/3 p-8"
                 whileHover={{ scale: 1.05 }}
               >
                 <p className="text-4xl font-bold text-brand mb-2">{stat.number}</p>

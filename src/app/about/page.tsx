@@ -88,7 +88,7 @@ export default function AboutPage() {
                 We believe that AI should be accessible, understandable, and beneficial. Our approach combines cutting-edge technology with practical business insights to deliver solutions that truly drive results.
               </p>
             </div>
-            <div className="bento-card h-96 bg-gradient-to-br from-brand/20 to-transparent" />
+            <div className="bento-card h-96 bg-linear-to-br from-brand/20 to-transparent" />
           </motion.div>
 
           {/* Values */}
@@ -139,7 +139,7 @@ export default function AboutPage() {
                   transition={{ delay: 0.7 + i * 0.1 }}
                   whileHover={{ translateY: -4 }}
                 >
-                  <div className="mb-4 h-32 w-full rounded-lg bg-gradient-to-br from-brand/20 to-transparent" />
+                  <div className="mb-4 h-32 w-full rounded-lg bg-linear-to-br from-brand/20 to-transparent" />
                   <h3 className="text-lg font-semibold">{member.name}</h3>
                   <p className="mb-2 text-sm text-brand font-medium">{member.role}</p>
                   <p className="text-sm text-white/60">{member.bio}</p>
@@ -163,7 +163,7 @@ export default function AboutPage() {
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}
-                className="rounded-xl bg-white/[0.03] p-6"
+                className="rounded-xl bg-white/3 p-6"
                 whileHover={{ scale: 1.05 }}
               >
                 <p className="text-4xl font-bold text-brand mb-2">{stat.number}</p>
