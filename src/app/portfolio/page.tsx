@@ -2,8 +2,9 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github } from 'lucide-react';
+import { Github } from 'lucide-react';
 import Navbar from '@/components/Navbar';
+import Link from 'next/link';
 
 const projects = [
   {
@@ -12,6 +13,7 @@ const projects = [
     tags: ['ML', 'Analytics', 'Cloud'],
     impact: '40% efficiency increase',
     client: 'Fortune 500 Company',
+    href: 'https://ai-client-interaction.vercel.app/',
   },
   {
     title: 'Customer Prediction Engine',
@@ -19,6 +21,7 @@ const projects = [
     tags: ['Python', 'TensorFlow', 'BigQuery'],
     impact: '35% sales increase',
     client: 'E-commerce Platform',
+    href: 'https://finance-app-woad-eight.vercel.app/',
   },
   {
     title: 'Natural Language Processing System',
@@ -26,6 +29,7 @@ const projects = [
     tags: ['NLP', 'GPT', 'Cloud'],
     impact: '60% support cost reduction',
     client: 'SaaS Startup',
+    href: 'https://ai-client-interaction.vercel.app/',
   },
   {
     title: 'Computer Vision Solution',
@@ -33,6 +37,7 @@ const projects = [
     tags: ['CV', 'Deep Learning', 'Real-time'],
     impact: '99.2% accuracy',
     client: 'Manufacturing Firm',
+    href: 'https://ai-client-interaction.vercel.app/',
   },
   {
     title: 'Recommendation Engine',
@@ -40,6 +45,7 @@ const projects = [
     tags: ['Recommendation', 'Personalization', 'Scala'],
     impact: '45% CTR improvement',
     client: 'Retail Giant',
+    href: 'https://ai-client-interaction.vercel.app/',
   },
   {
     title: 'Autonomous Workflow System',
@@ -47,6 +53,8 @@ const projects = [
     tags: ['Automation', 'RPA', 'AI'],
     impact: '80% time savings',
     client: 'Finance Corporation',
+    href: 'https://ai-client-interaction.vercel.app/',
+
   },
 ];
 
@@ -86,11 +94,16 @@ export default function PortfolioPage() {
                 <div className="mb-4">
                   <div className="mb-3 flex items-start justify-between">
                     <h3 className="text-xl font-bold leading-tight">{project.title}</h3>
-                    <ExternalLink className="size-5 text-brand/60 transition-colors group-hover:text-brand" />
+                    <Link 
+                      className="size-10 text-brand/60 transition-colors group-hover:text-brand" 
+                      href={project.href}
+                    >
+                      ↗️
+                    </Link>
                   </div>
                   <p className="text-sm text-brand font-medium">{project.client}</p>
                 </div>
-
+ 
                 {/* Description */}
                 <p className="mb-6 flex-1 text-white/70">{project.description}</p>
 

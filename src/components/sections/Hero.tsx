@@ -137,7 +137,7 @@ export default function Hero() {
                     alt="Founder image" 
                     fill
                     sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 320px"
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                    className="w-full h-full object-cover transition-all duration-700"
                     priority
                     />
 

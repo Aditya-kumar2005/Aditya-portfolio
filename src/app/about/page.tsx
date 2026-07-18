@@ -4,6 +4,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Users, Target, Lightbulb, Award } from 'lucide-react';
 import Navbar from '@/components/Navbar';
+import Image from 'next/image';
+import young from '../../../public/adi-lab-logo.jpg'
 
 const team = [
   {
@@ -88,7 +90,20 @@ export default function AboutPage() {
                 We believe that AI should be accessible, understandable, and beneficial. Our approach combines cutting-edge technology with practical business insights to deliver solutions that truly drive results.
               </p>
             </div>
-            <div className="bento-card h-96 bg-linear-to-br from-brand/20 to-transparent" />
+            <motion.div
+                className="relative w-full h-96 rounded-4xl overflow-hidden group"
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.3 }}
+                >
+              <Image
+              src={young}
+              alt="Founder image" 
+              fill
+              sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 320px"
+              className="w-full h-full object-cover transition-all duration-700"
+              priority
+              />
+            </motion.div>
           </motion.div>
 
           {/* Values */}
