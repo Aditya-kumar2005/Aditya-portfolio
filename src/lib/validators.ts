@@ -14,5 +14,6 @@ export const RegisterSchema = z.object({
 export const InquirySchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters long' }),
   email: z.string().email({ message: 'Invalid email address' }),
+  service:z.string().min(4,{message:'Invalid service'}),
   message: z.string().min(10, { message: 'Message must be at least 10 characters long' }),
 });

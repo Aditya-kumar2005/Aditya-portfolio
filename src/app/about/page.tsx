@@ -13,18 +13,18 @@ const team = [
   },
   {
     name: 'Sarah Johnson',
-    role: 'CTO',
-    bio: 'Expert in machine learning and system architecture',
+    role: 'Ai engineer',
+    bio: 'Ai agent expert in machine learning and system architecture',
   },
   {
     name: 'Mike Chen',
     role: 'Lead Engineer',
-    bio: 'Full-stack developer specializing in AI implementations',
+    bio: 'Ai agent Full-stack developer specializing in AI implementations',
   },
   {
     name: 'Emily Rodriguez',
     role: 'Product Manager',
-    bio: 'Passionate about delivering innovative AI solutions',
+    bio: 'Ai agent Passionate about delivering innovative AI solutions',
   },
 ];
 

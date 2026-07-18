@@ -21,7 +21,7 @@ interface PricingPlan {
 // ---------------------------------------------------------------------------
 // Data
 // ---------------------------------------------------------------------------
-
+ 
 const PLANS: PricingPlan[] = [
   {
     name: 'Starter',
@@ -41,7 +41,7 @@ const PLANS: PricingPlan[] = [
     cta: 'Get Started',
   },
   {
-    name: 'Growth',
+    name: 'Professional',
     badge: 'MVP Launch',
     price: '$1499-$4499',
     period: '/project',
@@ -60,10 +60,10 @@ const PLANS: PricingPlan[] = [
   {
     name: 'Enterprise',
     badge: 'Scale & Grow',
-    price: '$4499-$8900',
+    price: 'Custom',
     period: '/project',
     description:
-      'Supercharge your product with advanced AI, system optimization, and enterprise-grade scaling.',
+      'Advanced AI, system optimization, and enterprise-grade scaling.',
     features: [
       'Everything in Growth',
       'Custom RAG Systems',

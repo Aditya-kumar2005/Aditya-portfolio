@@ -1,35 +1,57 @@
-
 'use client';
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Linkedin, Github, Twitter, Loader2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Linkedin, Github, Loader2 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import { z } from 'zod';
 import { InquirySchema } from '@/lib/validators';
 
 type FormData = z.infer<typeof InquirySchema>;
+type FormState = 'IDLE' | 'SENDING' | 'SUCCESS' | 'ERROR';
+
+const PRODUCT_NEEDS = [
+  'SaaS Development',
+  'AI Integration',
+  'UI/UX Design',
+  'Maintenance & Scale',
+];
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState<FormData>({ name: '', email: '', message: '' });
-  const [loading, setLoading] = useState(false);
+  const [formState, setFormState] = useState<FormState>('IDLE');
+  const [formData, setFormData] = useState<FormData>({ 
+    name: '',
+    email: '',
+    service: '',
+    message: '',
+  });
   const [submitted, setSubmitted] = useState(false);
   const [validationErrors, setValidationErrors] = useState<Record<string, string[]>>({});
+
+  // Derive loading dynamically to prevent state syncing issues
+  const isSending = formState === 'SENDING';
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const updateField = (field: keyof FormData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
+    
+    if (isSending) return;
+
+    setFormState('SENDING');
     setValidationErrors({});
 
     const result = InquirySchema.safeParse(formData);
 
     if (!result.success) {
       setValidationErrors(result.error.flatten().fieldErrors);
-      setLoading(false);
+      setFormState('IDLE');
       return;
     }
 
@@ -40,18 +62,24 @@ export default function ContactPage() {
         body: JSON.stringify(result.data),
       });
 
+      const data = await res.json().catch(() => ({}));
+
       if (res.ok) {
         setSubmitted(true);
-        setFormData({ name: '', email: '', message: '' });
-        setTimeout(() => setSubmitted(false), 5000);
+        setFormState('SUCCESS');
+        setFormData({ name: '', email: '', service: '', message: '' });
+        setTimeout(() => {
+          setSubmitted(false);
+          setFormState('IDLE');
+        }, 5000);
+        console.log('Success:', data);
       } else {
-        const errorData = await res.json();
-        // Handle server-side validation errors if any
+        setFormState('ERROR');
+        throw new Error(data.error || 'Failed to submit. Please try again.');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-    } finally {
-      setLoading(false);
+      setFormState('ERROR');
     }
   };
 
@@ -89,8 +117,8 @@ export default function ContactPage() {
                   <Mail className="size-6 text-brand" />
                 </div>
                 <h3 className="mb-2 font-semibold">Email</h3>
-                <a href="mailto:aditya@adityalab.ai" className="text-white/70 hover:text-brand transition-colors">
-                  aditya@adityalab.ai
+                <a href="mailto:adityalabs87@gmail.com" className="text-white/70 hover:text-brand transition-colors">
+                  adityalabs87@gmail.com
                 </a>
               </div>
 
@@ -100,8 +128,8 @@ export default function ContactPage() {
                   <Phone className="size-6 text-brand" />
                 </div>
                 <h3 className="mb-2 font-semibold">Phone</h3>
-                <a href="tel:+1234567890" className="text-white/70 hover:text-brand transition-colors">
-                  +1 (234) 567-890
+                <a href="tel:+9369248808" className="text-white/70 hover:text-brand transition-colors">
+                  +9369248808
                 </a>
               </div>
 
@@ -111,17 +139,16 @@ export default function ContactPage() {
                   <MapPin className="size-6 text-brand" />
                 </div>
                 <h3 className="mb-2 font-semibold">Location</h3>
-                <p className="text-white/70">San Francisco, CA</p>
+                <p className="text-white/70">Kanpur, U.P, India</p>
               </div>
 
               {/* Social Links */}
-              <div>
+              <div> 
                 <h3 className="mb-4 font-semibold">Follow Us</h3>
                 <div className="flex gap-4">
                   {[
                     { icon: Github, href: 'https://github.com', label: 'GitHub' },
                     { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-                    { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
                   ].map(({ icon: Icon, href, label }) => (
                     <a
                       key={label}
@@ -154,6 +181,12 @@ export default function ContactPage() {
                 </motion.div>
               )}
 
+              {formState === 'ERROR' && (
+                <div className="mb-6 rounded-lg bg-red-500/20 p-4 text-red-500 border border-red-500/30">
+                  ✕ Something went wrong. Please try resubmitting the form.
+                </div>
+              )}
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid gap-6 md:grid-cols-2">
                   {/* Name */}
@@ -165,7 +198,8 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full rounded-lg bg-white/5 px-4 py-3 text-white placeholder:text-white/40 border border-white/10 transition-colors focus:border-brand focus:bg-white/8 outline-none"
+                      disabled={isSending}
+                      className="w-full rounded-lg bg-white/5 px-4 py-3 text-white placeholder:text-white/40 border border-white/10 transition-colors focus:border-brand focus:bg-white/8 outline-none disabled:opacity-40"
                       placeholder="Your name"
                     />
                     {validationErrors.name && <p className="mt-2 text-xs text-red-500">{validationErrors.name[0]}</p>}
@@ -180,11 +214,37 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full rounded-lg bg-white/5 px-4 py-3 text-white placeholder:text-white/40 border border-white/10 transition-colors focus:border-brand focus:bg-white/8 outline-none"
+                      disabled={isSending}
+                      className="w-full rounded-lg bg-white/5 px-4 py-3 text-white placeholder:text-white/40 border border-white/10 transition-colors focus:border-brand focus:bg-white/8 outline-none disabled:opacity-40"
                       placeholder="your@email.com"
                     />
                     {validationErrors.email && <p className="mt-2 text-xs text-red-500">{validationErrors.email[0]}</p>}
                   </div>
+                </div>
+
+                {/* Product Needs Dropdown */}
+                <div>
+                  <label htmlFor="contact-service" className="block mb-2 text-sm font-medium">
+                    Product Needs
+                  </label>
+                  <select
+                    id="contact-service"
+                    required
+                    value={formData.service}
+                    onChange={(e) => updateField('service', e.target.value)}
+                    disabled={isSending}
+                    className="w-full rounded-xl border border-white/6 bg-white/3 px-4 py-2.5 text-sm text-white outline-none transition-all focus:border-brand/40 focus:ring-2 focus:ring-brand/15 disabled:opacity-40 [&>option]:bg-surface [&>option]:text-white"
+                  >
+                    <option value="" disabled>
+                      Select a service
+                    </option>
+                    {PRODUCT_NEEDS.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                  {validationErrors.service && <p className="mt-2 text-xs text-red-500">{validationErrors.service[0]}</p>}
                 </div>
 
                 {/* Message */}
@@ -195,8 +255,9 @@ export default function ContactPage() {
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    disabled={isSending}
                     rows={6}
-                    className="w-full rounded-lg bg-white/5 px-4 py-3 text-white placeholder:text-white/40 border border-white/10 transition-colors focus:border-brand focus:bg-white/8 outline-none resize-none"
+                    className="w-full rounded-lg bg-white/5 px-4 py-3 text-white placeholder:text-white/40 border border-white/10 transition-colors focus:border-brand focus:bg-white/8 outline-none resize-none disabled:opacity-40"
                     placeholder="Tell us about your project..."
                   />
                   {validationErrors.message && <p className="mt-2 text-xs text-red-500">{validationErrors.message[0]}</p>}
@@ -205,12 +266,12 @@ export default function ContactPage() {
                 {/* Submit Button */}
                 <motion.button
                   type="submit"
-                  disabled={loading}
+                  disabled={isSending}
                   className="w-full rounded-lg bg-brand px-6 py-4 font-semibold text-dark shadow-lg shadow-brand/25 transition-all hover:bg-brand-secondary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                  whileHover={!loading ? { scale: 1.02 } : {}}
-                  whileTap={!loading ? { scale: 0.98 } : {}}
+                  whileHover={!isSending ? { scale: 1.02 } : {}}
+                  whileTap={!isSending ? { scale: 0.98 } : {}}
                 >
-                  {loading ? <Loader2 className="w-5 h-5 mr-2 animate-spin" /> : <Send className="w-5 h-5 mr-2" />}
+                  {isSending ? <Loader2 className="w-5 h-5 mr-2 animate-spin" /> : <Send className="w-5 h-5 mr-2" />}
                   Send Message
                 </motion.button>
               </form>
