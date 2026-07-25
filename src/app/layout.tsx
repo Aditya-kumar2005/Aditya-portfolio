@@ -140,6 +140,7 @@ export default function RootLayout({
           name="google-site-verification"
           content="w39Kz5w2njYiHg87Ja92t2_XocOtPMLGyOs9GHYrklg"
         />
+	<meta name="msvalidate.01" content="5DC0DAD597EA033BB06A3761E2906656" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
