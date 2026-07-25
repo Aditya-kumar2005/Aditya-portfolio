@@ -172,6 +172,14 @@ export default function RootLayout({
         <Providers>{children}</Providers>
         <Toaster richColors position="top-right" />
       </body>
+	<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+<script type="module">
+	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+	createChat({
+		webhookUrl: process.env.NEXT_PUBLIC_SITE_CHATBOT
+	});
+</script>
     </html>
   );
 }
