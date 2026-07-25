@@ -140,6 +140,7 @@ export default function RootLayout({
           name="google-site-verification"
           content="w39Kz5w2njYiHg87Ja92t2_XocOtPMLGyOs9GHYrklg"
         />
+        	<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
 	<meta name="msvalidate.01" content="5DC0DAD597EA033BB06A3761E2906656" />
         <script
           type="application/ld+json"
@@ -172,14 +173,6 @@ export default function RootLayout({
         <Providers>{children}</Providers>
         <Toaster richColors position="top-right" />
       </body>
-	<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-<script type="module">
-	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
-
-	createChat({
-		webhookUrl: process.env.NEXT_PUBLIC_SITE_CHATBOT
-	});
-</script>
     </html>
   );
 }
